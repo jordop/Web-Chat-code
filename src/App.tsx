@@ -16,7 +16,7 @@ function App() {
   setTheme()
 
   return (
-    <Chat setDark={setDark} setTheme={setTheme}} dark={dark}/>
+    <Chat setDark={setDark} setTheme={setTheme} dark={dark}/>
   )
 }
 
