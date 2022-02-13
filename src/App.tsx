@@ -1,5 +1,6 @@
 import ToggleDark from "./components/darkModeToggle/darkModeToggler"
 import { useState } from "react"
+import Chat from "./components/chat/chat"
 
 function App() {
   const [dark, setDark] = useState(true)
@@ -16,7 +17,11 @@ function App() {
   setTheme()
 
   return (
-    <ToggleDark setDark={setDark} setTheme={setTheme} dark={dark}/>
+    <div className="text-slate-800 dark:text-slate-100 bg-slate-200 dark:bg-slate-800 w-screen h-screen">
+      {/* <ToggleDark setDark={setDark} setTheme={setTheme} dark={dark}/> */}
+      
+      <Chat/>
+    </div>
   )
 }
 

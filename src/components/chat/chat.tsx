@@ -6,9 +6,9 @@ export default class Chat extends Component {
   }
   render() {
       return (
-          <div classname="chat-app">
-            <Channellist channels="{this.state.channels}"></Channellist>
-          </div>
+          <>
+            <Channellist channels={this.state.channels}/>
+          </>
       );
   }
 }
