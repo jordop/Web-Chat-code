@@ -2,7 +2,7 @@ import Chat from "./components/chat/chat"
 import { useState } from "react"
 
 function App() {
-  const [dark, setDark] = useState(false)
+  const [dark, setDark] = useState(true)
 
   const setTheme = () => {
     // On page load or when changing themes, best to add inline in `head` to avoid FOUC
