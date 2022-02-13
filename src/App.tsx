@@ -1,4 +1,4 @@
-import Chat from "./components/chat/chat"
+import ToggleDark from "./components/darkModeToggle/darkModeToggler"
 import { useState } from "react"
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
   setTheme()
 
   return (
-    <Chat setDark={setDark} setTheme={setTheme} dark={dark}/>
+    <ToggleDark setDark={setDark} setTheme={setTheme} dark={dark}/>
   )
 }
 
