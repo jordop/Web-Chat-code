@@ -3,7 +3,7 @@ import ChannelList from "./channelList/channelList";
 import MessagePanel from "./messages/messagePanel";
 import socketClient from "socket.io-client";
 
-const SERVER = "https://210.1.195.160:4000";
+const SERVER = "https://jrphomenas.synology.me:4000";
 
 interface chatProps {}
 export default class Chat extends Component {
@@ -50,16 +50,39 @@ export default class Chat extends Component {
 			});
 			this.setState({ channels });
 		});
+    socket.on("channel-join", (res: {id: number, msg: string}) => {
+      let channels = this.state.channels;
+      channels.forEach(c => {
+        if (res.id == c.id) {
+          if (!c.messages) {
+						c.messages = [{sender:"Server", text: res.msg, date: Date.now()}];
+					} else {
+						c.messages.push({sender:"Server", text: res.msg, date: Date.now()});
+					}
+        }
+      });
+    })
+    socket.on("channel-leave", (res: {id: number, msg: string}) => {
+      let channels = this.state.channels;
+      channels.forEach(c => {
+        if (res.id == c.id) {
+          if (!c.messages) {
+						c.messages = [{sender:"Server", text: res.msg, date: Date.now()}];
+					} else {
+						c.messages.push({sender:"Server", text: res.msg, date: Date.now()});
+					}
+        }
+      });
+    })
 		this.socket = socket;
 	};
 
 	loadChannels = async () => {
-		fetch(SERVER, {
+		fetch(SERVER + "/getChannels", {
 			method: "GET",
 		}).then(async (response) => {
 			let data = await response.json();
 			this.setState({ channels: data.channels });
-			console.log(data.channels);
 		});
 	};
 
@@ -76,7 +99,7 @@ export default class Chat extends Component {
 			channel_id,
 			text,
 			senderName: this.socket.id,
-			id: Date.now(),
+			date: Date.now(),
 		});
 	};
 

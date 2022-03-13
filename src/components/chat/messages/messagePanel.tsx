@@ -6,7 +6,7 @@ interface messagePannelProps {
 		id: number;
 		name: string;
 		messages: {
-			id: number;
+			date: Date;
 			sender: string;
 			text: string;
 		}[];
@@ -33,7 +33,7 @@ export default class MessagesPanel extends Component<messagePannelProps> {
 		);
 		if (this.props.channel && this.props.channel.messages) {
 			list = this.props.channel.messages.map((m) => (
-				<Message key={m.id} id={m.id} sender={m.sender} text={m.text} />
+				<Message key={m.id} date={m.date} sender={m.sender} text={m.text} />
 			));
 		}
 		return (
