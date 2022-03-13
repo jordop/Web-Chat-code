@@ -3,7 +3,7 @@ import ChannelList from "./channelList/channelList";
 import MessagePanel from "./messages/messagePanel";
 import socketClient from "socket.io-client";
 
-const SERVER = "http://localhost:4000";
+const SERVER = "https://jrphomenas.synology.me/";
 
 interface chatProps {}
 export default class Chat extends Component {
@@ -30,7 +30,7 @@ export default class Chat extends Component {
 		});
 		socket.on("channel", (channel) => {
 			let channels = this.state.channels;
-			channels.forEach((c) => {
+			channels.forEach((c: { id: any; participants: any; }) => {
 				if (c.id === channel.id) {
 					c.participants = channel.participants;
 				}
@@ -39,7 +39,7 @@ export default class Chat extends Component {
 		});
 		socket.on("message", (message) => {
 			let channels = this.state.channels;
-			channels.forEach((c) => {
+			channels.forEach((c: { id: any; messages: any[]; }) => {
 				if (c.id === message.channel_id) {
 					if (!c.messages) {
 						c.messages = [message];
@@ -64,11 +64,11 @@ export default class Chat extends Component {
 	};
 
 	handleChannelSelect = (id: number) => {
-		let channel = this.state.channels.find((c) => {
+		let channel = this.state.channels.find((c: { id: number; }) => {
 			return c.id === id;
 		});
 		this.setState({ channel });
-		this.socket.emit("channel-join", id, (ack) => {});
+		this.socket.emit("channel-join", id, (ack: any) => {});
 	};
 
 	handleSendMessage = (channel_id: number, text: string) => {
