@@ -3,7 +3,7 @@ import ChannelList from "./channelList/channelList";
 import MessagePanel from "./messages/messagePanel";
 import socketClient from "socket.io-client";
 
-const SERVER = "http://210.1.195.160:4000";
+const SERVER = "https://210.1.195.160:4000";
 
 interface chatProps {}
 export default class Chat extends Component {
