@@ -54,7 +54,7 @@ export default class Chat extends Component {
 	};
 
 	loadChannels = async () => {
-		fetch("http://localhost:4000/getChannels", {
+		fetch(SERVER, {
 			method: "GET",
 		}).then(async (response) => {
 			let data = await response.json();
