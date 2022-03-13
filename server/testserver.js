@@ -2,7 +2,7 @@ import cors from 'cors';
 import express from 'express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
-
+import process from "process";
 const app = new express()
 const server = createServer(app)
 const io = new Server(server, {
@@ -11,6 +11,9 @@ const io = new Server(server, {
   }
 })
 const port = 4000
+
+if (process.pid)
+    console.log("Process id is: ") + process.pid
 
 var SERVERS = [{
   name: 'Global chat',
