@@ -1,10 +1,17 @@
 import cors from 'cors';
 import express from 'express';
-import { createServer } from 'http';
+import { createServer } from 'https';
 import { Server } from 'socket.io';
 import process from "process";
+import { readFileSync } from 'fs';
+
+const options = {
+  key: readFileSync('key.pem'),
+  cert: readFileSync('cert.pem')
+};
+
 const app = new express()
-const server = createServer(app)
+const server = createServer(options, app)
 const io = new Server(server, {
   cors: {
     origin: "*",
@@ -27,7 +34,7 @@ var SERVERS = [{
   sockets: []
 }];
 
-app.get('/getChannels', cors(), (req, res) => {
+app.get('/getChannels', (req, res) => {
   res.json({
     channels: SERVERS
   })
@@ -76,5 +83,5 @@ io.on('connection', (socket) => { // socket object may be used to send specific 
 
 
 server.listen(port, () => {
-  console.log(`Test Server is running on port ${port}`)
+  console.log(`Server is running on port ${port}`)
 })
