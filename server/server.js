@@ -34,7 +34,9 @@ var SERVERS = [{
   sockets: []
 }];
 
-app.get('/getChannels', (req, res) => {
+app.get("/", cors(), (req, res))
+
+app.get('/getChannels', cors(), (req, res) => {
   res.json({
     channels: SERVERS
   })
