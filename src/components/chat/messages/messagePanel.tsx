@@ -33,7 +33,7 @@ export default class MessagesPanel extends Component<messagePannelProps> {
 		);
 		if (this.props.channel && this.props.channel.messages) {
 			list = this.props.channel.messages.map((m) => (
-				<Message key={m.id} date={m.date} sender={m.sender} text={m.text} />
+				<Message date={m.date} sender={m.sender} text={m.text} />
 			));
 		}
 		return (
