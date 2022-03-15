@@ -1,7 +1,7 @@
 import { Component } from "react";
-import ChannelList from "./channelList/channelList";
 import MessagePanel from "./messages/messagePanel";
 import socketClient from "socket.io-client";
+import Sidebar from "./sidebar/sidebar";
 
 const SERVER = "https://jrphomenas.synology.me:4000";
 
@@ -106,10 +106,7 @@ export default class Chat extends Component {
 	render() {
 		return (
 			<>
-				<ChannelList
-					channels={this.state.channels}
-					onSelectChannel={this.handleChannelSelect}
-				/>
+				<Sidebar channels={this.state.channels} handleChannelSelect={this.handleChannelSelect}/>
 				<MessagePanel
 					onSendMessage={this.handleSendMessage}
 					channel={this.state.channel}

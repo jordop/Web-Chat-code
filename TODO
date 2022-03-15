@@ -1,0 +1,17 @@
+Refactor code to support smaller screens. 
+taking a "mobile first" approach. this probably should have been considered first before we started, but we can consider the current version a "proof of concept"
+
+Mobile Support:
+  ✔ cleared styling @done(22-03-15 22:40)
+  ☐ simplify elements and optimise functions
+  ☐ figure out responsive tailwind and how to do it right (⌐■_■)
+  sidebar:
+    ☐ configure sidebar and toggle button
+    ☐ style 2 types of displays for servers ( smaller one for collapsed, larger for open )
+    ☐ setup toggle automation ( i.e. closed on mobile, open on pc )
+
+General:
+  ☐ tidy event handlers. (create a more robust API?) includes optimising code @low
+  ☐ UI/UX design @critical
+
+Archive:

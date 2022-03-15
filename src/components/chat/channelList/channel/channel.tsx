@@ -14,9 +14,9 @@ export default class Channel extends React.Component<channelProps> {
 
 	render() {
 		return (
-			<div className="border-b border-stone-500 dark:border-stone-200 p-3" onClick={this.click}>
-				<div className="font-bold">{this.props.name}</div>
-				<span className="text-xs">Users: {this.props.participants}</span>
+			<div className="" onClick={this.click}>
+				<div className="">{this.props.name}</div>
+				<span className="">Users: {this.props.participants}</span>
 			</div>
 		);
 	}

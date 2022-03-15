@@ -8,21 +8,9 @@ interface ChannelListProps {
 		name: string;
 		participants: number;
 	}[];
-	onSelectChannel: (id: any) => void;
+  onSelectChannel: (id: number) => void
 }
 export default class ChannelList extends Component<ChannelListProps> {
-	
-  state = {
-    dark: true
-  }
-
-  handleThemeChange = (dark: boolean) => {
-    this.setState({ dark: dark })
-  }
-  
-  handleClick = (id: number) => {
-		this.props.onSelectChannel(id);
-	};
 
 	render() {
 		let list: any = (
@@ -35,30 +23,16 @@ export default class ChannelList extends Component<ChannelListProps> {
 					id={c.id}
 					name={c.name}
 					participants={c.participants}
-					onClick={this.handleClick}
+					onClick={this.props.onSelectChannel}
 				/>
 			));
 		}
 
-    const setTheme = () => {
-      if (this.state.dark === true ) {
-        document.body.classList.add('dark')
-      } else {
-        document.body.classList.remove('dark')
-      }
-    }
-
-    setTheme()
-
 		return (
-			<div className="w-2/12 h-screen flex flex-col">
-				<div className="w-full h-5/6 border-r dark:border-stone-200 border-stone-500">
+				<div className="">
 					{list}
 				</div>
-        <div className="p-4 pt-6 w-full h-1/6 border-t border-r border-stone-500 dark:border-stone-200">
-          <ToggleDark setDark={this.handleThemeChange} setTheme={setTheme} dark={this.state.dark}/>
-        </div>
-			</div>
+
 		);
 	}
 }
