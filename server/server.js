@@ -6,8 +6,9 @@ import process from "process";
 import { readFileSync } from 'fs';
 
 const options = {
-  key: readFileSync('key.pem'),
-  cert: readFileSync('cert.pem')
+  key: readFileSync('privkey.pem','utf8'),
+  cert: readFileSync('cert.pem','utf8'),
+  ca: readFileSync('chain.pem','utf8')
 };
 
 const app = new express()
@@ -15,12 +16,14 @@ const server = createServer(options, app)
 const io = new Server(server, {
   cors: {
     origin: "*",
+	credentials: false,
+	allowedHeaders: "*"
   }
 })
 const port = 4000
 
 if (process.pid)
-    console.log("Process id is: ") + process.pid
+    console.log("Process id is: " + process.pid)
 
 var SERVERS = [{
   name: 'Global chat',
@@ -34,7 +37,9 @@ var SERVERS = [{
   sockets: []
 }];
 
-app.get("/", cors(), (req, res))
+app.get('/', cors(), (req, res) => {
+  res.send("Hello, world!")
+});
 
 app.get('/getChannels', cors(), (req, res) => {
   res.json({
@@ -53,6 +58,7 @@ io.on('connection', (socket) => { // socket object may be used to send specific 
                   c.sockets.push(socket.id);
                   c.participants++;
                   io.emit('channel', c);
+				  io.emit('channel-join', {id: c.id, msg: "User joined"});
               }
           } else {
               let index = c.sockets.indexOf(socket.id);
@@ -60,6 +66,7 @@ io.on('connection', (socket) => { // socket object may be used to send specific 
                   c.sockets.splice(index, 1);
                   c.participants--;
                   io.emit('channel', c);
+				  io.emit('channel-leave', {id: c.id, msg: "User left"});
               }
           }
       });
